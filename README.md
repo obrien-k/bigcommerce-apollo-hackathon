@@ -1,2 +1,3 @@
 # bigcommerce-apollo-hackathon
-federation POC
+
+Proof of Concept Apollo Federation for BigCommerce's first hackathon.
