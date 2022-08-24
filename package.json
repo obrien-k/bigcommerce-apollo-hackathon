@@ -1,0 +1,24 @@
+{
+  "name": "bigcommerce-apollo-hackathon",
+  "version": "1.0.0",
+  "description": "federation POC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obrien-k/bigcommerce-apollo-hackathon.git"
+  },
+  "keywords": [
+    "bigcommerce",
+    "apollo",
+    "federation"
+  ],
+  "author": "Kyle O'Brien",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/obrien-k/bigcommerce-apollo-hackathon/issues"
+  },
+  "homepage": "https://github.com/obrien-k/bigcommerce-apollo-hackathon#readme"
+}
