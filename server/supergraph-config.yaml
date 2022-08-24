@@ -1,14 +1,14 @@
 federation_version: 2
 subgraphs:
-  nasa:
+  admin:
     routing_url: http://localhost:4001/
     schema:
-      file: ./subgraph-nasa/nasa.graphql
-  xkcd:
+      file: ./subgraph-admin/admin.graphql
+  checkout:
     routing_url: http://localhost:4002/
     schema:
-      file: ./subgraph-xkcd/xkcd.graphql
-  accounts:
+      file: ./subgraph-checkout/checkout.graphql
+  product:
     routing_url: http://localhost:4003/
     schema:
-      file: ./subgraph-accounts/accounts.graphql
+      file: ./subgraph-product/product.graphql
