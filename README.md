@@ -4,7 +4,7 @@ Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first
 
 ## Auth subgraph
 
-Tokenization requires a publicly facing IP for stateless login, 
+Tokenization requires a publicly facing IP for stateless login, uses [BigCommerce Storefront Login](https://developer.bigcommerce.com/graphql-playground). 
 
 ## Products subgraph
 
