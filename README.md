@@ -1,6 +1,6 @@
 # bigcommerce-apollo-hackathon
 
-Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first hackathon, [BigHackathon](https://twitter.com/hashtag/bighackathon).
+Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first hackathon, [BigHackathon](https://twitter.com/hashtag/bighackathon). [What is the supergraph?](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/)
 
 ## Auth subgraph
 
