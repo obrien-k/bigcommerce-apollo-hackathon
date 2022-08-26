@@ -1,14 +1,14 @@
 federation_version: 2
 subgraphs:
-  admin:
+  auth:
     routing_url: http://localhost:4001/
     schema:
-      file: ./subgraph-admin/admin.graphql
-  checkout:
+      file: ./subgraph-auth/auth.graphql
+  customers:
     routing_url: http://localhost:4002/
     schema:
-      file: ./subgraph-checkout/checkout.graphql
-  product:
+      file: ./subgraph-customers/customers.graphql
+  products:
     routing_url: http://localhost:4003/
     schema:
-      file: ./subgraph-product/product.graphql
+      file: ./subgraph-products/products.graphql

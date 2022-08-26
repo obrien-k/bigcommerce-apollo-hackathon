@@ -2,15 +2,15 @@ const {ApolloServer, gql, AuthenticationError} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync(__dirname + '/admin.graphql', {encoding: 'utf-8'}));
+const typeDefs = gql(readFileSync(__dirname + '/auth.graphql', {encoding: 'utf-8'}));
 const resolvers = require(__dirname + '/resolvers');
-const AdminSource = require(__dirname + '/datasources/admin');
+const AuthSource = require(__dirname + '/datasources/auth');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      AdminSource: new AdminSource()
+      AuthSource: new AuthSource()
     };
   },
   context: async ({req}) => {
@@ -25,7 +25,7 @@ const server = new ApolloServer({
 });
 
 const port = 4001;
-const subgraphName = 'admin';
+const subgraphName = 'auth';
 
 server
   .listen({ port: process.env.PORT || port })

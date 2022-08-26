@@ -1,0 +1,15 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+# do I need this since it's stateless? prob no?
+type Query {
+  "Returns all auth"
+  auth: String!
+  "Find one admin based on token" # current customer model
+  adminById(id: ID!): admin
+}
+
+type auth @key(fields: "id") {
+  id: ID!,
+  role: String!
+}
