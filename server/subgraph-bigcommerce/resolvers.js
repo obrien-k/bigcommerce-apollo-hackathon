@@ -3,7 +3,7 @@ const { AuthenticationError } = require("apollo-server"); //unused but needs to 
 const resolvers = {
   Query: {
     // returns account A&A
-    bigCommerceLogin: async (_, {email, pass}, {dataSources}) => {
+    bigCommerceLogin: async (data, {email, pass}, {dataSources}) => {
       return dataSources.BigCommerceLogin.getLogin(email, pass);
     }
   }

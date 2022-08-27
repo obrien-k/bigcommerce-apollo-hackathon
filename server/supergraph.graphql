@@ -16,19 +16,25 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-type admin
-  @join__type(graph: ADMIN, key: "id")
+type Auth
+  @join__type(graph: BIGCOMMERCE, key: "id")
 {
   id: ID!
   role: String!
 }
 
+type Errors
+  @join__type(graph: BIGCOMMERCE)
+{
+  message: String
+}
+
 scalar join__FieldSet
 
 enum join__Graph {
-  ADMIN @join__graph(name: "admin", url: "http://localhost:4001/")
-  CHECKOUT @join__graph(name: "checkout", url: "http://localhost:4002/")
-  PRODUCT @join__graph(name: "product", url: "http://localhost:4003/")
+  BIGCOMMERCE @join__graph(name: "bigcommerce", url: "http://localhost:4001/")
+  CUSTOMERS @join__graph(name: "customers", url: "http://localhost:4002/")
+  PRODUCTS @join__graph(name: "products", url: "http://localhost:4003/")
 }
 
 scalar link__Import
@@ -46,13 +52,20 @@ enum link__Purpose {
 }
 
 type Query
-  @join__type(graph: ADMIN)
-  @join__type(graph: CHECKOUT)
-  @join__type(graph: PRODUCT)
+  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: CUSTOMERS)
+  @join__type(graph: PRODUCTS)
 {
-  """Returns all admin"""
-  admin: [admin] @join__field(graph: ADMIN)
+  """Returns all auth"""
+  auth: String! @join__field(graph: BIGCOMMERCE)
 
-  """Find one admin based on ID"""
-  adminById(id: ID!): admin @join__field(graph: ADMIN)
+  """BigCommerce customer login"""
+  BigCommerceLogin(email: String!, pass: String!): Result! @join__field(graph: BIGCOMMERCE)
+}
+
+type Result
+  @join__type(graph: BIGCOMMERCE)
+{
+  data: String
+  errors: Errors
 }

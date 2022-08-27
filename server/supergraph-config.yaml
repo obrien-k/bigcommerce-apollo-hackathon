@@ -1,9 +1,9 @@
 federation_version: 2
 subgraphs:
-  auth:
+  bigcommerce:
     routing_url: http://localhost:4001/
     schema:
-      file: ./subgraph-auth/auth.graphql
+      file: ./subgraph-bigcommerce/bigcommerce.graphql
   customers:
     routing_url: http://localhost:4002/
     schema:
