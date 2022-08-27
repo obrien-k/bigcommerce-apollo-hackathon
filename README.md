@@ -2,7 +2,7 @@
 
 // CODE INCOMPLETE.
 
-Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first [BigHackathon](https://twitter.com/hashtag/bighackathon). [What is the supergraph?](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/).
+Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first [BigHackathon](https://twitter.com/hashtag/bighackathon). [What is the supergraph?](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/)
 
 Gateway and BigCommerce subgraph initial structure setup with quirks (e.g. no payload D;).
 
