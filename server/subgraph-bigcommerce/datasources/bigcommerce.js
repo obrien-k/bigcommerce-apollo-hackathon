@@ -47,7 +47,7 @@ const login = gql`
 
 class BigCommerceLogin extends GraphQLDataSource {
   baseURL = 'https://hack.bigcom.dev/graphql';
-
+// use this https://developer.bigcommerce.com/api-reference/b3A6MjMxMzY0Ng-get-current-customer
   willSendRequest(request) {
     const { accessToken } = this.context;
 
@@ -73,5 +73,7 @@ class BigCommerceLogin extends GraphQLDataSource {
     }
   }
 }
+
+// need customer-impersonate / customer-login components
 
 module.exports = BigCommerceLogin;
