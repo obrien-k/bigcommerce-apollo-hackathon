@@ -3,12 +3,13 @@ class AuthSource {
   getAuth() {
     return auth;
   }
-  getAuth(authId) {
-    // const authFile = fs.readFileSync(__dirname + '/auth.json', {encoding:'utf-8'})
-    // const parsedFile = JSON.parse(adminFile);
-    // const findAuth = (parsedFile.auth.find(i => i.id == authId))
+  /*
+  getAdminById(authId) {
+    const authFile = fs.readFileSync(__dirname + '/auth.json', {encoding:'utf-8'})
+    const parsedFile = JSON.parse(adminFile);
+    const findAuth = (parsedFile.auth.find(i => i.id == authId))
     return findAuth;
-  }
+  }*/
 }
 
 module.exports = AuthSource;

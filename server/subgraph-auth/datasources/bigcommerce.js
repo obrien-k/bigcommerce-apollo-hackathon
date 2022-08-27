@@ -1,5 +1,5 @@
-const { GraphQLDataSource } = 'apollo-datasource-graphql';
-const { gql } = 'apollo-server-express';
+const { GraphQLDataSource } = require('apollo-datasource-graphql');
+const { gql } = require('apollo-server');
 
 const login = gql` 
  mutation Login($email: String!, $pass: String!) {

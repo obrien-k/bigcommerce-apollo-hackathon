@@ -5,8 +5,6 @@ extend schema
 type Query {
   "Returns all auth"
   auth: String!
-  "Find one admin based on token" # current customer model
-  adminById(id: ID!): admin
 }
 
 type auth @key(fields: "id") {
