@@ -5,12 +5,14 @@ const {buildSubgraphSchema} = require('@apollo/subgraph');
 const typeDefs = gql(readFileSync(__dirname + '/auth.graphql', {encoding: 'utf-8'}));
 const resolvers = require(__dirname + '/resolvers');
 const AuthSource = require(__dirname + '/datasources/auth');
+const BigCommerceLogin = require(__dirname + '/datasources/bigcommerce');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      AuthSource: new AuthSource()
+      AuthSource: new AuthSource(),
+      BigCommerceLogin: new BigCommerceLogin()
     };
   },
   context: async ({req}) => {
