@@ -1,13 +1,24 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
         import: ["@key"])
-# do I need this since it's stateless? prob no?
+
 type Query {
   "Returns all auth"
   auth: String!
+  "BigCommerce customer login"
+  BigCommerceLogin (email: String!, pass: String!): Result!
 }
 
-type auth @key(fields: "id") {
-  id: ID!,
+type Auth @key(fields: "id") {
+  id: ID!
   role: String!
+}
+
+type Result {
+  data: String
+  errors: Errors
+}
+
+type Errors {
+  message: String
 }

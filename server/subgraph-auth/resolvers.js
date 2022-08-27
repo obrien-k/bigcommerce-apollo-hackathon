@@ -19,6 +19,9 @@ const resolvers = {
     },
     auth: async (_, __, {dataSources}) => {
       return dataSources.AuthSource.getAuth();
+    },
+    bigCommerceLogin: async (_, {email, pass}, {dataSources}) => {
+      return dataSources.BigCommerceLogin.getLogin(email, pass);
     }
   },
   auth: {
