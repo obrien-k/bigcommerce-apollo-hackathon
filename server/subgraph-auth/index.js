@@ -11,7 +11,6 @@ const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      AuthSource: new AuthSource(),
       BigCommerceLogin: new BigCommerceLogin()
     };
   },

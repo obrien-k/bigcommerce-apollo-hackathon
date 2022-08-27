@@ -1,7 +1,7 @@
-import { GraphQLDataSource } from 'apollo-datasource-graphql';
-import { gql } from 'apollo-server-express';
+const { GraphQLDataSource } = 'apollo-datasource-graphql';
+const { gql } = 'apollo-server-express';
 
-const login = gql ` 
+const login = gql` 
  mutation Login($email: String!, $pass: String!) {
    login(email: $email, password: $pass) {
      result
@@ -9,7 +9,7 @@ const login = gql `
  }
  `;
 
-export class BigCommerceLogin extends GraphQLDataSource {
+class BigCommerceLogin extends GraphQLDataSource {
   baseURL = 'https://hack.bigcom.dev/graphql';
 
   willSendRequest(request) {
@@ -37,3 +37,5 @@ export class BigCommerceLogin extends GraphQLDataSource {
     }
   }
 }
+
+module.exports = BigCommerceLogin;
