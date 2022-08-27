@@ -23,8 +23,8 @@ const payload = async function(req, res, next) {
   }
 };
 
-async function checkBigCommerce(email, pass) {
-const saltRounds = 10;
+async function checkBigCommerce(email, pass) { // where to call this? is this being executed correctly 
+const saltRounds = 10; // ? feels off, like I know what I'm doing incorrectly
 
 const someOtherPlaintextPassword = 'not_bacon';
 
