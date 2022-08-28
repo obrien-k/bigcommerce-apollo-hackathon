@@ -1,4 +1,4 @@
-# bigcommerce-apollo-hackathon
+# Stellar
 
 // CODE INCOMPLETE.
 
