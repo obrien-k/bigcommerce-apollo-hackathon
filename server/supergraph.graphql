@@ -16,13 +16,6 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-type Auth
-  @join__type(graph: BIGCOMMERCE, key: "id")
-{
-  id: ID!
-  role: String!
-}
-
 type Errors
   @join__type(graph: BIGCOMMERCE)
 {
@@ -56,14 +49,11 @@ type Query
   @join__type(graph: CUSTOMERS)
   @join__type(graph: PRODUCTS)
 {
-  """Returns all auth"""
-  auth: String! @join__field(graph: BIGCOMMERCE)
-
   """BigCommerce customer login"""
-  BigCommerceLogin(email: String!, pass: String!): Result! @join__field(graph: BIGCOMMERCE)
+  BigCommerceLogin(email: String!, pass: String!): result @join__field(graph: BIGCOMMERCE)
 }
 
-type Result
+type result
   @join__type(graph: BIGCOMMERCE)
 {
   data: String

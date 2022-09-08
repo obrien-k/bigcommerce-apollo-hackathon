@@ -1,9 +1,27 @@
 const { GraphQLDataSource } = require('apollo-datasource-graphql');
 const { gql }               = require('apollo-server');
 const jwt                   = require('jsonwebtoken');
+const express               = require('express');
+      router                = express.Router();
+const BigCommerce           = require('node-bigcommerce');
+ 
+const bigCommerce = new BigCommerce({
+  logLevel: 'info',
+  clientId: process.env.BIGC_CLIENT_ID,
+  secret: process.env.BIGC_CLIENT_SECRET,
+  callback: 'https://store-' + process.env.BIGC_STORE_HASH + '.bigcommerce.com/auth',
+  responseType: 'json',
+  headers: { 'Accept-Encoding': '*' }, // Override headers (Overriding the default encoding of GZipped is useful in development)
+  apiVersion: 'v3' // Default is v2
+});
 
 // jwt payload
 
+router.get('/auth', (req, res, next) => {
+  bigCommerce.authorize(req.query)
+    .then(data => res.render('integrations/auth', { title: 'Authorized!', data: data })
+    .catch(next));
+  });
 
 async function checkBigCommerce(email, pass) { // where to call this? is this being executed correctly 
   const payload = async function(req, res, next) {
@@ -50,7 +68,7 @@ const login = gql`
  `;
 
 class BigCommerceLogin extends GraphQLDataSource {
-  baseURL = 'https://shop.orphic.xyz/graphql';
+  baseURL = 'https://store-';
 // use this https://developer.bigcommerce.com/api-reference/b3A6MjMxMzY0Ng-get-current-customer
   willSendRequest(request) {
     const { accessToken } = this.context;

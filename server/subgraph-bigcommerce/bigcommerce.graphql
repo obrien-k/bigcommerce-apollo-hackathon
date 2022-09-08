@@ -3,18 +3,11 @@ extend schema
         import: ["@key"])
 
 type Query {
-  "Returns all auth"
-  auth: String!
   "BigCommerce customer login"
-  BigCommerceLogin (email: String!, pass: String!): Result!
+  BigCommerceLogin (email: String!, pass: String!): result
 }
 
-type Auth @key(fields: "id") {
-  id: ID!
-  role: String!
-}
-
-type Result {
+type result {
   data: String
   errors: Errors
 }

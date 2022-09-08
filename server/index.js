@@ -10,8 +10,8 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request, context }) {
     // Pass the user's id from the context to each subgraph
     // as a header called `user-id`
-    request.http.headers.set('userId', context.user.userId);
-    request.http.headers.set('userRole', context.user.userRole);
+    request.http.headers.set('email', context.email);
+    request.http.headers.set('pass', context.pass);
   }
 }
 
@@ -24,17 +24,17 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({
   gateway,
-  // Subscriptions are not currently supported in Apollo Federation
   subscriptions: false,
   context: async ({req}) => {
-    const token = req.headers.authorization || ''; // e.g., "Bearer user-1"
-    // Get the user token after "Bearer "
-    const id = token.split(' ')[1]; // e.g., "user-1"
-    if (id) { // clean this up, assign userId to a var and start using real data
-      return {user: {userId: id, userRole:"test"}}
+    const bigc_email = req.headers.email;
+    const bigc_pass = req.headers.pass || '';
+    const token = req.headers.authorization; //shouldn't need this? I'm generating the token?
+    console.log(token);
+    if (bigc_pass) { // clean this up, assign userId to a var and start using real data
+      return {BigcLogin: {email: bigc_email, pass: bigc_pass}}
     }
-    if (!id) { // guest account for not logged in
-      return {user: {userId: "0", userRole: "Guest"}}
+    if (!bigc_pass) { // guest account for not logged in
+      return { token }
     }
   }
 });
