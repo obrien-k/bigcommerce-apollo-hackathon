@@ -15,11 +15,13 @@ const server = new ApolloServer({
   },
   context: async ({req}) => {
     const auth = req.headers.authorize || ''
-    const id = req.headers.userid || ''; // e.g., "Bearer user-1"
-    // Get the user token after "Bearer "
-    //const id = token.split(' ')[1]; // e.g., "user-1"
-    if (auth) { // clean this up, assign userId to a var and start using real data
-      return {user: {authorize: id, userRole:req.headers.userrole}}
+    const email = req.headers.email || ''; // bigc email for customer
+    const pass = req.headers.pass || ''; // bigc pass for customer
+    const jwt = req.headers.jwt || '';
+    // Get the user token after "Bearer"
+    // const id = token.split(' ')[1]; // e.g., "user-1"
+    if (auth, email, pass, jwt) { // clean this up, assign userId to a var and start using real data.. attempt 1
+      return {user: {authorize: id, userEmail:req.headers.userEmail}, jwt}
     }
     //if (!id) throw new AuthenticationError('You must be logged in'); // see line 1 in resolvers
   }
