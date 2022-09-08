@@ -1,20 +1,20 @@
 # bigcommerce-apollo-hackathon
 
-Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first hackathon, [BigHackathon](https://twitter.com/hashtag/bighackathon). [What is the supergraph?](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/)
+// CODE INCOMPLETE.
+
+Proof of Concept Apollo Federation / supergraph for entry in BigCommerce's first [BigHackathon](https://twitter.com/hashtag/bighackathon). [What is the supergraph?](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/)
+
+Gateway and BigCommerce subgraph initial structure setup with quirks (e.g. no payload D;).
+
+Starting with Products / Customers subgraph would have resulted in queries to workaround login requirement, but wouldn't have unlocked more of the BigCommerce graph like login or wishlist would (being Mutations).
+
+Contributions are welcome! [There are many types that could be implemented as subgraphs](https://developer.bigcommerce.com/graphql-api-reference).
 
 ## Auth subgraph
 
-Tokenization requires a publicly facing IP for stateless login, uses [BigCommerce Storefront Login](https://developer.bigcommerce.com/graphql-playground). 
+Tokenization requires a publicly facing IP for stateless login, uses [BigCommerce Storefront Login](https://developer.bigcommerce.com/graphql-playground). I have the same jwt code working somewhere else and understand bcrypt, need to implement them together correctly.
 
 ## Products subgraph
-
+// TODO
 ## Customers subgraph
-
-
-## [Time til Due](https://free.timeanddate.com/countdown/i8h158tn/n24/cf100/cm0/cu4/ct0/cs0/ca0/cr0/ss0/cac000/cpc000/pcfff/tc66c/fs100/szw320/szh135/tatTime%20left%20to%20Event%20in/tac000/tptTime%20since%20Event%20started%20in/tpc000/mac000/mpc000/iso2022-08-26T11:50:00)
-
-## Test URL
-[https://hack.bigcom.dev/graphql](https://hack.bigcom.dev/graphql)
-
-
-## v2 ? wishlists, orders, etc. Checkout may not make it for v1.
+// TODO
