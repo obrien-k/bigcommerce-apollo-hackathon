@@ -30,7 +30,6 @@ async function checkBigCommerce(email, pass) { // where to call this? is this be
   
   const saltRounds = 10; // ? feels off, like I know what I'm doing incorrectly
   console.log(payload + "LINE 29");
-  const email = email;
   console.log(email + "LINE 31");
   const hash = bcrypt.hashSync(pass, saltRounds);
 
@@ -51,7 +50,7 @@ const login = gql`
  `;
 
 class BigCommerceLogin extends GraphQLDataSource {
-  baseURL = 'https://hack.bigcom.dev/graphql';
+  baseURL = 'https://shop.orphic.xyz/graphql';
 // use this https://developer.bigcommerce.com/api-reference/b3A6MjMxMzY0Ng-get-current-customer
   willSendRequest(request) {
     const { accessToken } = this.context;
@@ -61,8 +60,8 @@ class BigCommerceLogin extends GraphQLDataSource {
     if (!request.headers) {
       request.headers = {};
     }
-    
-    request.headers.authorization = accessToken;
+    console.log("LINE 63" + request.headers.email);
+    console.log("LINE 64" + request.headers.pass);
   }
 
   async getLogin() {
