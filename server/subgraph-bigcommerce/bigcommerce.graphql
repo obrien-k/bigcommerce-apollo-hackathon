@@ -4,14 +4,31 @@ extend schema
 
 type Query {
   "BigCommerce customer login"
-  BigCommerceLogin (email: String!, pass: String!): result
+  BigCommerceLogin (email: String!, pass: String!): LoginResult
 }
 
 type result {
-  data: String
+  data: Data
   errors: Errors
 }
 
 type Errors {
   message: String
+}
+
+type Data {
+  login: LoginResult!
+}
+
+type LoginResult {
+  "Deprecated BIGC GQL endpoint, replace with Customer node"
+  result: String!
+  customer: Customer
+}
+
+type Customer @key(fields: "entityId") {
+  entityId: Int
+  customerGroupId: Int,
+  email: String,
+  taxExemptCategory: String
 }

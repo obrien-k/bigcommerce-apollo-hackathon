@@ -16,6 +16,21 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+type Customer
+  @join__type(graph: BIGCOMMERCE, key: "entityId")
+{
+  entityId: Int
+  customerGroupId: Int
+  email: String
+  taxExemptCategory: String
+}
+
+type Data
+  @join__type(graph: BIGCOMMERCE)
+{
+  login: LoginResult!
+}
+
 type Errors
   @join__type(graph: BIGCOMMERCE)
 {
@@ -44,18 +59,26 @@ enum link__Purpose {
   EXECUTION
 }
 
+type LoginResult
+  @join__type(graph: BIGCOMMERCE)
+{
+  """Deprecated BIGC GQL endpoint, replace with Customer node"""
+  result: String!
+  customer: Customer
+}
+
 type Query
   @join__type(graph: BIGCOMMERCE)
   @join__type(graph: CUSTOMERS)
   @join__type(graph: PRODUCTS)
 {
   """BigCommerce customer login"""
-  BigCommerceLogin(email: String!, pass: String!): result @join__field(graph: BIGCOMMERCE)
+  BigCommerceLogin(email: String!, pass: String!): LoginResult @join__field(graph: BIGCOMMERCE)
 }
 
 type result
   @join__type(graph: BIGCOMMERCE)
 {
-  data: String
+  data: Data
   errors: Errors
 }
