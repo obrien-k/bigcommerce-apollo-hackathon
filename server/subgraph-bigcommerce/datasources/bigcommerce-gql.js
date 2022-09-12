@@ -4,7 +4,8 @@ const jwt                   = require('jsonwebtoken');
 const express               = require('express');
       router                = express.Router();
 const BigCommerce           = require('node-bigcommerce');
- 
+require('dotenv').config()
+
 const bigCommerce = new BigCommerce({
   logLevel: 'info',
   clientId: process.env.BIGC_CLIENT_ID,

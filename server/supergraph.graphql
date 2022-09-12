@@ -73,7 +73,7 @@ type Query
   @join__type(graph: PRODUCTS)
 {
   """BigCommerce customer login"""
-  BigCommerceLogin(email: String!, pass: String!): LoginResult @join__field(graph: BIGCOMMERCE)
+  BigCommerceLogin(email: String!, pass: String!): LoginResult! @join__field(graph: BIGCOMMERCE)
 }
 
 type result

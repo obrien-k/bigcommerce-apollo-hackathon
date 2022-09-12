@@ -4,10 +4,12 @@ extend schema
 
 type Query {
   "BigCommerce customer login"
-  BigCommerceLogin (email: String!, pass: String!): LoginResult
+  BigCommerceLogin (email: String!, pass: String!): LoginResult!
+  "BigCommerce Storefront API Token generator"
+  BigCommerceRestAPI: BigcRestResult
 }
 
-type result {
+type BigcRestResult {
   data: Data
   errors: Errors
 }
@@ -17,7 +19,7 @@ type Errors {
 }
 
 type Data {
-  login: LoginResult!
+  token: String
 }
 
 type LoginResult {
