@@ -13,7 +13,7 @@ Contributions are welcome! [There are many types that could be implemented as su
 ### Usage
 
 Query for a [Storefront API Token](https://developer.bigcommerce.com/api-reference/044bc7b21e5b4-create-a-token) with StorefrontToken:
-
+```
 query StellarQuery {
   StorefrontToken {
     data {
@@ -24,9 +24,9 @@ query StellarQuery {
     }
   }
 }
-
+```
 A store's [system logs] can be queried as well:
-
+```
 query StellarQuery {
 SystemLogs {
     data {
@@ -52,7 +52,7 @@ SystemLogs {
     }
   }
 }
-
+```
 Here's an example of both in action:
 
 ![Stellar Query Example](stellarqueryexample.jpg "Stellar Query Example")
