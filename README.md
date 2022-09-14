@@ -55,7 +55,7 @@ SystemLogs {
 
 Here's an example of both in action:
 
-[Stellar Query Example](stellarequeryexample.jpg)
+![Stellar Query Example](stellarqueryexample.jpg "Stellar Query Example")
 
 ## Products subgraph
 // TODO
