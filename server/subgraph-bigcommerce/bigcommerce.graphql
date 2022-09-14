@@ -35,11 +35,11 @@ type StorefrontTokenData {
 }
 
 type SystemLogsResult {
-  data: SystemLogsData
+  data: [SystemLogs]
   meta: Meta
 }
 
-type SystemLogsData {
+type SystemLogs {
   id: ID
   type: String
   module: String

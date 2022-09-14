@@ -109,7 +109,7 @@ type StorefrontTokenResult
   errors: Errors
 }
 
-type SystemLogsData
+type SystemLogs
   @join__type(graph: BIGCOMMERCE)
 {
   id: ID
@@ -124,6 +124,6 @@ type SystemLogsData
 type SystemLogsResult
   @join__type(graph: BIGCOMMERCE)
 {
-  data: SystemLogsData
+  data: [SystemLogs]
   meta: Meta
 }
