@@ -29,5 +29,9 @@
     "dotenv": "^16.0.1",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "@bigcommerce/stencil-cli": "^5.2.0"
   }
 }

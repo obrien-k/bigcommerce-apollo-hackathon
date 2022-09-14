@@ -1,33 +1,34 @@
 {
-  "name": "bigcommerce-apollo-hackathon",
-  "version": "1.0.0",
-  "description": "federation POC",
+  "name": "stellar",
+  "version": "0.0.2",
+  "description": "federation bigcommerce OS POC",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./server/subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",
+    "start": "concurrently \"npm run server\" \"node ./server/subgraph-bigcommerce/index\"",
     "server": "node ./server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./server/subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-bigcommerce/index\"",
     "prod": "node ./server",
     "compose-schema": "rover supergraph compose --config ./server/supergraph-config.yaml > ./server/supergraph.graphql",
-    "accounts-subgraph-publish": "rover subgraph publish Marstronaut@dev --name accounts --schema ./server/subgraph-accounts/accounts.graphql --routing-url http://localhost:4003"
+    "bigcommerce-subgraph-publish": "rover subgraph publish BigCommerce@dev --name accounts --schema ./server/subgraph-accounts/accounts.graphql --routing-url http://localhost:4003"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/obrien-k/bigcommerce-apollo-hackathon.git"
+    "url": "git+https://github.com/orphic-inc/stellar.git"
   },
   "keywords": [
     "bigcommerce",
     "apollo",
-    "federation"
+    "federation",
+    "bighackathon"
   ],
   "author": "Kyle O'Brien",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/obrien-k/bigcommerce-apollo-hackathon/issues"
+    "url": "https://github.com/orphic-inc/stellar/issues"
   },
-  "homepage": "https://github.com/obrien-k/bigcommerce-apollo-hackathon#readme",
+  "homepage": "https://github.com/orphic-inc/stellar#readme",
   "dependencies": {
     "@apollo/gateway": "^2.0.5",
     "@apollo/subgraph": "^2.0.5",
@@ -35,14 +36,13 @@
     "apollo-datasource-graphql": "^1.3.2",
     "apollo-datasource-rest": "^3.6.1",
     "apollo-server": "^3.9.0",
-    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "concurrently": "^7.3.0",
     "dotenv": "^16.0.1",
-    "graphql": "^16.6.0",
-    "node-bigcommerce": "^4.1.0"
+    "graphql": "^16.6.0"
   },
   "devDependencies": {
+    "@bigcommerce/stencil-cli": "^5.2.0",
     "nodemon": "^2.0.19"
   }
 }

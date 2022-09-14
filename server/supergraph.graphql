@@ -16,13 +16,6 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-type Auth
-  @join__type(graph: BIGCOMMERCE, key: "id")
-{
-  id: ID!
-  role: String!
-}
-
 type Errors
   @join__type(graph: BIGCOMMERCE)
 {
@@ -35,6 +28,12 @@ enum join__Graph {
   BIGCOMMERCE @join__graph(name: "bigcommerce", url: "http://localhost:4001/")
   CUSTOMERS @join__graph(name: "customers", url: "http://localhost:4002/")
   PRODUCTS @join__graph(name: "products", url: "http://localhost:4003/")
+}
+
+type Link
+  @join__type(graph: BIGCOMMERCE)
+{
+  current: String!
 }
 
 scalar link__Import
@@ -51,21 +50,63 @@ enum link__Purpose {
   EXECUTION
 }
 
+type Meta
+  @join__type(graph: BIGCOMMERCE)
+{
+  pagination: Pagination
+}
+
+type Pagination
+  @join__type(graph: BIGCOMMERCE)
+{
+  total: Int
+  count: Int
+  per_page: Int
+  current_page: Int
+  total_pages: Int
+  links: Link
+}
+
 type Query
   @join__type(graph: BIGCOMMERCE)
   @join__type(graph: CUSTOMERS)
   @join__type(graph: PRODUCTS)
 {
-  """Returns all auth"""
-  auth: String! @join__field(graph: BIGCOMMERCE)
+  """BigCommerce Storefront API Token generator"""
+  StorefrontToken: StorefrontTokenResult @join__field(graph: BIGCOMMERCE)
 
-  """BigCommerce customer login"""
-  BigCommerceLogin(email: String!, pass: String!): Result! @join__field(graph: BIGCOMMERCE)
+  """BigCommerce Store Logs"""
+  SystemLogs: SystemLogsResult @join__field(graph: BIGCOMMERCE)
 }
 
-type Result
+type StorefrontTokenData
   @join__type(graph: BIGCOMMERCE)
 {
-  data: String
+  token: String
+}
+
+type StorefrontTokenResult
+  @join__type(graph: BIGCOMMERCE)
+{
+  data: StorefrontTokenData
   errors: Errors
+}
+
+type SystemLogsData
+  @join__type(graph: BIGCOMMERCE)
+{
+  Id: String!
+  Type: String
+  Module: String
+  Severity: String
+  Summary: String
+  Message: String
+  DateCreated: String
+}
+
+type SystemLogsResult
+  @join__type(graph: BIGCOMMERCE)
+{
+  SystemLogsData: SystemLogsData
+  Meta: Meta
 }
