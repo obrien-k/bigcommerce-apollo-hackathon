@@ -7,21 +7,18 @@ type Query {
   StorefrontToken: StorefrontTokenResult
   "BigCommerce Store Logs"
   SystemLogs: SystemLogsResult
+  "BigCommerce Products"
+  Products: ProductsResult
 }
 
-type SystemLogsResult {
-  SystemLogsData: SystemLogsData
-  Meta: Meta
+type ProductsResult {
+  data: [Product]
+  meta: Meta
 }
 
-type SystemLogsData {
-  Id: String!
-  Type: String
-  Module: String
-  Severity: String
-  Summary: String
-  Message: String
-  DateCreated: String
+type Product {
+  id: ID
+  name: String
 }
 
 type StorefrontTokenResult {
@@ -37,17 +34,32 @@ type StorefrontTokenData {
   token: String
 }
 
+type SystemLogsResult {
+  data: SystemLogsData
+  meta: Meta
+}
+
+type SystemLogsData {
+  id: ID
+  type: String
+  module: String
+  severity: String
+  summary: String
+  message: String
+  date_created: String
+}
+
 type Meta {
   pagination: Pagination 
 }
 
 type Pagination {
-    total: Int
-    count: Int
-    per_page: Int
-    current_page: Int
-    total_pages: Int
-    links: Link
+  total: Int
+  count: Int
+  per_page: Int
+  current_page: Int
+  total_pages: Int
+  links: Link
 }
 
 type Link {

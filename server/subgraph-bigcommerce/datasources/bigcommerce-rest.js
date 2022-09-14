@@ -1,5 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 class BigCommerceRestAPI extends RESTDataSource {
   willSendRequest(request) {
@@ -12,7 +12,10 @@ class BigCommerceRestAPI extends RESTDataSource {
     this.baseURL = 'https://api.bigcommerce.com/stores/' + process.env.BIGC_STORE_HASH + '/v3/';
   }
   async getSystemLogs(){
-    return this.get(`store/systemlogs`)
+    return this.get(`store/systemlogs`);
+  }
+  async getProducts(){
+    return this.get(`catalog/products`);
   }
 
   async getStorefrontToken(allowed_cors_origins, channel_id, expires_at) {

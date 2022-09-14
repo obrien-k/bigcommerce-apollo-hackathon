@@ -13,7 +13,12 @@ const resolvers = {
     // trying store logs (GET instead of POST like above)
     SystemLogs: async (_, __, { dataSources }) => {
       return dataSources.BigCommerceRestAPI.getSystemLogs();
+    },
+
+    Products: async (_, __, { dataSources }) => {
+      return dataSources.BigCommerceRestAPI.getProducts();
     }
+
   }
 };
 

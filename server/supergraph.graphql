@@ -67,6 +67,20 @@ type Pagination
   links: Link
 }
 
+type Product
+  @join__type(graph: BIGCOMMERCE)
+{
+  id: ID
+  name: String
+}
+
+type ProductsResult
+  @join__type(graph: BIGCOMMERCE)
+{
+  data: [Product]
+  meta: Meta
+}
+
 type Query
   @join__type(graph: BIGCOMMERCE)
   @join__type(graph: CUSTOMERS)
@@ -77,6 +91,9 @@ type Query
 
   """BigCommerce Store Logs"""
   SystemLogs: SystemLogsResult @join__field(graph: BIGCOMMERCE)
+
+  """BigCommerce Products"""
+  Products: ProductsResult @join__field(graph: BIGCOMMERCE)
 }
 
 type StorefrontTokenData
@@ -95,18 +112,18 @@ type StorefrontTokenResult
 type SystemLogsData
   @join__type(graph: BIGCOMMERCE)
 {
-  Id: String!
-  Type: String
-  Module: String
-  Severity: String
-  Summary: String
-  Message: String
-  DateCreated: String
+  id: ID
+  type: String
+  module: String
+  severity: String
+  summary: String
+  message: String
+  date_created: String
 }
 
 type SystemLogsResult
   @join__type(graph: BIGCOMMERCE)
 {
-  SystemLogsData: SystemLogsData
-  Meta: Meta
+  data: SystemLogsData
+  meta: Meta
 }
