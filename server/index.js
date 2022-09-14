@@ -8,8 +8,9 @@ const supergraphSdl = readFileSync(__dirname + '/supergraph.graphql').toString()
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request, context }) {
+    // Might need to move this to customer subgraph.. depends on data structure.
     // Pass the user's id from the context to each subgraph
-    // as a header called `user-id`
+    // as a header called `email` and 'pass'
     request.http.headers.set('email', context.email);
     request.http.headers.set('pass', context.pass);
   }
