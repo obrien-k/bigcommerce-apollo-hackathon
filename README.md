@@ -25,7 +25,7 @@ query StellarQuery {
   }
 }
 ```
-A store's [system logs] can be queried as well:
+A store's [system logs](https://developer.bigcommerce.com/api-reference/6908d02370409-get-system-logs) can be queried as well:
 ```
 query StellarQuery {
 SystemLogs {
