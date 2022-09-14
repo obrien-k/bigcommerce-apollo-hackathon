@@ -3,14 +3,29 @@ extend schema
         import: ["@key"])
 
 type Query {
-  "BigCommerce customer login"
-  BigCommerceLogin (email: String!, pass: String!): LoginResult!
   "BigCommerce Storefront API Token generator"
-  BigCommerceRestAPI: BigcRestResult
+  StorefrontToken: StorefrontTokenResult
+  "BigCommerce Store Logs"
+  SystemLogs: SystemLogsResult
 }
 
-type BigcRestResult {
-  data: Data
+type SystemLogsResult {
+  SystemLogsData: SystemLogsData
+  Meta: Meta
+}
+
+type SystemLogsData {
+  Id: String!
+  Type: String
+  Module: String
+  Severity: String
+  Summary: String
+  Message: String
+  DateCreated: String
+}
+
+type StorefrontTokenResult {
+  data: StorefrontTokenData
   errors: Errors
 }
 
@@ -18,19 +33,23 @@ type Errors {
   message: String
 }
 
-type Data {
+type StorefrontTokenData {
   token: String
 }
 
-type LoginResult {
-  "Deprecated BIGC GQL endpoint, replace with Customer node"
-  result: String!
-  customer: Customer
+type Meta {
+  pagination: Pagination 
 }
 
-type Customer @key(fields: "entityId") {
-  entityId: Int
-  customerGroupId: Int,
-  email: String,
-  taxExemptCategory: String
+type Pagination {
+    total: Int
+    count: Int
+    per_page: Int
+    current_page: Int
+    total_pages: Int
+    links: Link
+}
+
+type Link {
+  current: String!
 }

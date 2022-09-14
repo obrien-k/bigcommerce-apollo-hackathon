@@ -3,11 +3,16 @@ const { AuthenticationError } = require("apollo-server"); //unused but needs to 
 const resolvers = {
   Query: {
     // returns account A&A
-    bigCommerceLogin: async (_, {email, pass}, {dataSources}) => {
+   /* bigCommerceLogin: async (_, {email, pass}, {dataSources}) => {
       return dataSources.BigCommerceLogin.getLogin(email, pass);
+    },*/
+    StorefrontToken: async (_, { allowed_cors_origins, channel_id, expires_at }, { dataSources }) => {
+      return dataSources.BigCommerceRestAPI.getStorefrontToken(allowed_cors_origins, channel_id, expires_at);
     },
-    bigCommerceRestAPI: async (_, {allowed_cors_origins, channel_id, expires_at}, {dataSources}) => {
-      return dataSources.bigCommerceRestAPI.postToken(email, pass);
+
+    // trying store logs (GET instead of POST like above)
+    SystemLogs: async (_, __, { dataSources }) => {
+      return dataSources.BigCommerceRestAPI.getSystemLogs();
     }
   }
 };
