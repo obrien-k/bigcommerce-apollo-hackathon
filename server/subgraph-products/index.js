@@ -2,9 +2,9 @@ const {ApolloServer, gql, AuthenticationError} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync(__dirname + '/catalog.graphql', {encoding: 'utf-8'}));
+const typeDefs = gql(readFileSync(__dirname + '/products.graphql', {encoding: 'utf-8'}));
 const resolvers = require(__dirname + '/resolvers');
-const BigCommerceCatalogAPI = require(__dirname + '/datasources/catalog');
+const BigCommerceCatalogAPI = require(__dirname + '/datasources/products');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
@@ -18,8 +18,8 @@ const server = new ApolloServer({
   }
 });
 
-const port = 4002;
-const subgraphName = 'Catalog';
+const port = 4003;
+const subgraphName = 'Products';
 
 server
   .listen({ port: process.env.PORT || port })
