@@ -17,7 +17,7 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
 type Errors
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STOREFRONT)
 {
   message: String
 }
@@ -25,13 +25,14 @@ type Errors
 scalar join__FieldSet
 
 enum join__Graph {
-  BIGCOMMERCE @join__graph(name: "bigcommerce", url: "http://localhost:4001/")
   CUSTOMERS @join__graph(name: "customers", url: "http://localhost:4002/")
   PRODUCTS @join__graph(name: "products", url: "http://localhost:4003/")
+  STORELOGS @join__graph(name: "storeLogs", url: "http://localhost:4009/")
+  STOREFRONT @join__graph(name: "storefront", url: "http://localhost:4001/")
 }
 
 type Link
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STORELOGS)
 {
   current: String!
 }
@@ -51,13 +52,13 @@ enum link__Purpose {
 }
 
 type Meta
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STORELOGS)
 {
   pagination: Pagination
 }
 
 type Pagination
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STORELOGS)
 {
   total: Int
   count: Int
@@ -68,49 +69,49 @@ type Pagination
 }
 
 type Product
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: PRODUCTS)
 {
   id: ID
   name: String
 }
 
 type ProductsResult
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: PRODUCTS)
 {
   data: [Product]
-  meta: Meta
 }
 
 type Query
-  @join__type(graph: BIGCOMMERCE)
   @join__type(graph: CUSTOMERS)
   @join__type(graph: PRODUCTS)
+  @join__type(graph: STORELOGS)
+  @join__type(graph: STOREFRONT)
 {
-  """BigCommerce Storefront API Token generator"""
-  StorefrontToken: StorefrontTokenResult @join__field(graph: BIGCOMMERCE)
+  """BigCommerce Products"""
+  Products: ProductsResult @join__field(graph: PRODUCTS)
 
   """BigCommerce Store Logs"""
-  SystemLogs: SystemLogsResult @join__field(graph: BIGCOMMERCE)
+  SystemLogs: SystemLogsResult @join__field(graph: STORELOGS)
 
-  """BigCommerce Products"""
-  Products: ProductsResult @join__field(graph: BIGCOMMERCE)
+  """BigCommerce Storefront API Token generator"""
+  StorefrontToken: StorefrontTokenResult @join__field(graph: STOREFRONT)
 }
 
 type StorefrontTokenData
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STOREFRONT)
 {
   token: String
 }
 
 type StorefrontTokenResult
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STOREFRONT)
 {
   data: StorefrontTokenData
   errors: Errors
 }
 
 type SystemLogs
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STORELOGS)
 {
   id: ID
   type: String
@@ -122,7 +123,7 @@ type SystemLogs
 }
 
 type SystemLogsResult
-  @join__type(graph: BIGCOMMERCE)
+  @join__type(graph: STORELOGS)
 {
   data: [SystemLogs]
   meta: Meta
