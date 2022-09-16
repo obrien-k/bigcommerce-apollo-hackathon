@@ -30,9 +30,8 @@ const server = new ApolloServer({
     const bigc_email = req.headers.email;
     const bigc_pass = req.headers.pass || '';
     const token = req.headers.authorization; //shouldn't need this? I'm generating the token?
-    console.log(token);
-    if (bigc_pass) { // clean this up, assign userId to a var and start using real data
-      return {BigcLogin: {email: bigc_email, pass: bigc_pass}}
+    if (bigc_pass) { // clean this up, assign userId to a var and start using real data // this still applies generally
+      return {BigcLogin: {email: bigc_email, pass: bigc_pass}} // need to pass this via headers to further abstract imo
     }
     if (!bigc_pass) { // guest account for not logged in
       return { token }
