@@ -20,9 +20,9 @@ class BigCommerceStorefrontAPI extends RESTDataSource {
           "channel_id": 1,
           "expires_at": 1885635176
           }
-    //request.body.set(reqBody); // pass in json // it errored when I ran in the constructor.. Not sure if this is wired correctly..
     return this.post(`storefront/api-token`, reqBody);
   }
+  // next: https://developer.bigcommerce.com/api-reference/9d3747546a160-revoke-a-token
 }
 
 module.exports = BigCommerceStorefrontAPI

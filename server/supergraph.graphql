@@ -94,19 +94,19 @@ type Query
   SystemLogs: SystemLogsResult @join__field(graph: STORELOGS)
 
   """BigCommerce Storefront API Token generator"""
-  StorefrontToken: StorefrontTokenResult @join__field(graph: STOREFRONT)
+  StorefrontToken: StorefrontTokenResult! @join__field(graph: STOREFRONT)
 }
 
 type StorefrontTokenData
-  @join__type(graph: STOREFRONT)
+  @join__type(graph: STOREFRONT, key: "token")
 {
-  token: String
+  token: String!
 }
 
 type StorefrontTokenResult
   @join__type(graph: STOREFRONT)
 {
-  data: StorefrontTokenData
+  data: StorefrontTokenData!
   errors: Errors
 }
 
