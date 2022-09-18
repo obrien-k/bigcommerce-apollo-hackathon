@@ -6,10 +6,11 @@ const sinon = require('sinon');
 
 // verify object has token field
 describe('token', () => {
-  it('should pass', async () => {
-    sinon.replace(resolvers.Query, 'StorefrontToken', sinon.fake());
-    resolvers.Query.StorefrontToken({ 'token': 'ko' }, sinon.fake());
-    const bigc = { 'token' : 'ko' }
+  it('StorefrontToken shouldn\'t return undefined', async () => {
+    // Uncomment below, test fails due to function data === undefined
+    // sinon.replace(resolvers.Query, 'StorefrontToken', sinon.fake());
+    //const actual = await resolvers.Query.StorefrontToken({ 'token': 'ko' }, sinon.fake());
+    const bigc = { BigCommerceStorefrontAPI: {getStorefrontToken: sinon.stub().resolves({ 'token': 'ko' })} };
     const actual = await resolvers.Query.StorefrontToken({}, {'allowed_cors_origins': [
       'https://apollographql.com'
       ],
@@ -17,7 +18,6 @@ describe('token', () => {
       'expires_at': 1885635176
       }, { dataSources: bigc });
     expect(actual).to.be.eql({ 'token': 'ko' });
-    
   });
 });
 // if token field does the property match jwt spec
