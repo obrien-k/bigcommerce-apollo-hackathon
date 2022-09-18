@@ -1,20 +1,10 @@
+/* Postponed for now */
 const { GraphQLDataSource } = require('apollo-datasource-graphql');
 const { gql }               = require('apollo-server');
 const jwt                   = require('jsonwebtoken');
 const express               = require('express');
       router                = express.Router();
-const BigCommerce           = require('node-bigcommerce');
 require('dotenv').config()
-
-const bigCommerce = new BigCommerce({
-  logLevel: 'info',
-  clientId: process.env.BIGC_CLIENT_ID,
-  secret: process.env.BIGC_CLIENT_SECRET,
-  callback: 'https://store-' + process.env.BIGC_STORE_HASH + '.bigcommerce.com/auth',
-  responseType: 'json',
-  headers: { 'Accept-Encoding': '*' }, // Override headers (Overriding the default encoding of GZipped is useful in development)
-  apiVersion: 'v3' // Default is v2
-});
 
 // jwt payload
 
@@ -70,10 +60,9 @@ const login = gql`
 
 class BigCommerceLogin extends GraphQLDataSource {
   baseURL = 'https://store-';
-// use this https://developer.bigcommerce.com/api-reference/b3A6MjMxMzY0Ng-get-current-customer
+
   willSendRequest(request) {
     const { accessToken } = this.context;
-
     checkBigCommerce(request.headers.email, request.headers.pass);
 
     if (!request.headers) {

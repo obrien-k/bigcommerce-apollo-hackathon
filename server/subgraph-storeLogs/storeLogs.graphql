@@ -1,0 +1,37 @@
+
+type Query {
+  "BigCommerce Store Logs"
+  SystemLogs: SystemLogsResult
+}
+
+type SystemLogsResult {
+  data: [SystemLogs]
+  meta: Meta
+}
+
+type SystemLogs {
+  id: ID
+  type: String
+  module: String
+  severity: String
+  summary: String
+  message: String
+  date_created: String
+}
+
+type Meta {
+  pagination: Pagination 
+}
+
+type Pagination {
+  total: Int
+  count: Int
+  per_page: Int
+  current_page: Int
+  total_pages: Int
+  links: Link
+}
+
+type Link {
+  current: String!
+}

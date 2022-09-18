@@ -1,9 +1,9 @@
 federation_version: 2
 subgraphs:
-  bigcommerce:
+  storefront:
     routing_url: http://localhost:4001/
     schema:
-      file: ./subgraph-bigcommerce/bigcommerce.graphql
+      file: ./subgraph-storefront/storefront.graphql
   customers:
     routing_url: http://localhost:4002/
     schema:
@@ -12,3 +12,7 @@ subgraphs:
     routing_url: http://localhost:4003/
     schema:
       file: ./subgraph-products/products.graphql
+  storeLogs:
+    routing_url: http://localhost:4009/
+    schema:
+      file: ./subgraph-storeLogs/storeLogs.graphql

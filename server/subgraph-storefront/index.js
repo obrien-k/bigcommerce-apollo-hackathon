@@ -2,17 +2,15 @@ const {ApolloServer, gql, AuthenticationError} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync(__dirname + '/bigcommerce.graphql', {encoding: 'utf-8'}));
+const typeDefs = gql(readFileSync(__dirname + '/storefront.graphql', {encoding: 'utf-8'}));
 const resolvers = require(__dirname + '/resolvers');
-//const BigCommerceLogin = require(__dirname + '/datasources/bigcommerce-gql');
-const BigCommerceRestAPI = require(__dirname + '/datasources/bigcommerce-rest');
+const BigCommerceStorefrontAPI = require(__dirname + '/datasources/storefront');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      //BigCommerceLogin: new BigCommerceLogin(),
-      BigCommerceRestAPI: new BigCommerceRestAPI()
+      BigCommerceStorefrontAPI: new BigCommerceStorefrontAPI()
     };
   },
   context: async ({req}) => {
@@ -32,7 +30,7 @@ const server = new ApolloServer({
 });
 
 const port = 4001;
-const subgraphName = 'BigCommerce';
+const subgraphName = 'Storefront';
 
 server
   .listen({ port: process.env.PORT || port })

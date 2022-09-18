@@ -1,0 +1,21 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
+type Query {
+  "BigCommerce Storefront API Token generator"
+  StorefrontToken: StorefrontTokenResult!
+}
+
+type StorefrontTokenResult {
+  data: StorefrontTokenData!
+  errors: Errors
+}
+
+type Errors {
+  message: String
+}
+
+type StorefrontTokenData @key(fields: "token") {
+  token: String!
+}

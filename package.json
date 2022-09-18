@@ -1,17 +1,17 @@
 {
   "name": "stellar",
-  "version": "0.0.2",
-  "description": "federation bigcommerce OS POC",
+  "version": "0.0.3",
+  "description": "Apollo Federation BigCommerce OS supergraph",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"node ./server/subgraph-bigcommerce/index\"",
+    "test": "mocha",
+    "start": "concurrently \"npm run server\" \"node ./server/subgraph-storefront/index\" \"node ./server/subgraph-products/index\" \"node ./server/subgraph-storeLogs/index\"",
     "server": "node ./server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-bigcommerce/index\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-storefront/index\" \"node ./server/subgraph-products/index\" \"node ./server/subgraph-storeLogs/index\"",
     "prod": "node ./server",
     "compose-schema": "rover supergraph compose --config ./server/supergraph-config.yaml > ./server/supergraph.graphql",
-    "bigcommerce-subgraph-publish": "rover subgraph publish BigCommerce@dev --name accounts --schema ./server/subgraph-accounts/accounts.graphql --routing-url http://localhost:4003"
+    "storefront-subgraph-publish": "rover subgraph publish Storefront@dev --name storefront --schema ./server/subgraph-storefront/storefront.graphql --routing-url http://localhost:4001"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@bigcommerce/stencil-cli": "^5.2.0",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.19"
   }
 }
