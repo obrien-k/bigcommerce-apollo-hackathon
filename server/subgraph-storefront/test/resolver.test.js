@@ -2,37 +2,37 @@ const resolvers = require('../resolvers');
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-// load in schema locally ?
 
-// verify object has token field
 describe('token', () => {
-  it('StorefrontToken shouldn\'t return undefined', async () => {
+  // Verify object has token field
+  it('StorefrontToken should return a token', async () => {
     // Uncomment below, test fails due to function data === undefined
     // sinon.replace(resolvers.Query, 'StorefrontToken', sinon.fake());
-    //const actual = await resolvers.Query.StorefrontToken({ 'token': 'ko' }, sinon.fake());
     const bigc = { BigCommerceStorefrontAPI: {getStorefrontToken: sinon.stub().resolves({ 'token': 'ko' })} };
     const actual = await resolvers.Query.StorefrontToken({}, {'allowed_cors_origins': [
       'https://apollographql.com'
       ],
       'channel_id': 1,
-      'expires_at': 1885635176
+      'expires_at': 1885635176 // Should automate
       }, { dataSources: bigc });
     expect(actual).to.be.eql({ 'token': 'ko' });
   });
-});
-// if token field does the property match jwt spec
+  // if token field does the property match jwt spec
+  // failing
+  it('token should be jwt spec', async () => {
+    sinon.replace(resolvers.Query.StorefrontToken, {BigCommerceStorefrontAPI: {getStorefrontToken}}, sinon.fake());
+    //resolvers.Query.StorefrontToken({ 'token' :'1' }, sinon.fake());
+    // regex jwt ?
+    sinon.assert.calledWithMatch(resolvers.Query.StorefrontToken({ 'token': '1' }));
+    expect(actual).to.be.eql({ 'token' : '1'})
+  });
 
-// attempt at mocking server data
-describe('server mock', () => {
-  it('paste change this'), async () => {
-    sinon.replace(resolvers.Query, 'StorefrontToken', sinon.fake());
-    resolvers.Query.StorefrontToken({ 'channel_id' :'1' }, sinon.fake());
-    sinon.assert.calledWithMatch(resolvers.Query({ 'token': 'ko' }));
-    expect(actual).to.be.eql({ 'token' : 'ko'})
-  }
 });
+
 // verify errors are null
 // if not null special handler?
+
+// restore sinon replacements
 after(function () {
   sinon.restore();
 });
