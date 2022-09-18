@@ -2,18 +2,13 @@ const resolvers = require('../resolvers');
 const { expect } = require('chai');
 const sinon = require('sinon');
 
+// load in schema locally ?
+
 // verify object has token field
 describe('token', () => {
   it('should pass', async () => {
     const bigc = {
-      "data": {
-          "StorefrontToken": {
-            "data": {
-              "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOjEsImNvcnMiOlsiaHR0cHM6Ly9hcG9sbG9ncmFwaHFsLmNvbSJdLCJlYXQiOjE4ODU2MzUxNzYsImlhdCI6MTY2MzQwMjgxOCwiaXNzIjoiQkMiLCJzaWQiOjEwMDE2MTA0NzcsInN1YiI6ImxibnlwOWR1NWw0bnJ2ZmZ6bHExdDcyc2Q1eDZ6ODciLCJzdWJfdHlwZSI6MiwidG9rZW5fdHlwZSI6MX0.pRlSqjwufarM3sD-XY5UpTSTAbFfrqVHZYOBXd4jAok_AJr4P_djlCRDv16KC-Kb6AP-WHZ9L3PWNwG19S7MKw"
-            },
-            "errors": null
-          },
-    }
+      // BigCommerceStorefrontAPI
   }
     const actual = await resolvers.Query.StorefrontToken({}, {"allowed_cors_origins": [
       "https://apollographql.com"
