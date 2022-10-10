@@ -5,12 +5,14 @@ const {buildSubgraphSchema} = require('@apollo/subgraph');
 const typeDefs = gql(readFileSync(__dirname + '/storefront.graphql', {encoding: 'utf-8'}));
 const resolvers = require(__dirname + '/resolvers');
 const BigCommerceStorefrontAPI = require(__dirname + '/datasources/storefront');
+const BigCommerceLogin = require(__dirname + '/datasources/bigcommerce-gql.js');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      BigCommerceStorefrontAPI: new BigCommerceStorefrontAPI()
+      BigCommerceStorefrontAPI: new BigCommerceStorefrontAPI(),
+      BigCommerceLogin: new BigCommerceLogin()
     };
   },
   context: async ({req}) => {

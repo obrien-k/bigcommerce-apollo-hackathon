@@ -16,6 +16,26 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+type BigCommerceLoginData
+  @join__type(graph: STOREFRONT)
+{
+  site: products
+}
+
+type BigCommerceLoginResult
+  @join__type(graph: STOREFRONT)
+{
+  data: BigCommerceLoginData!
+  errors: Errors
+}
+
+type edges
+  @join__type(graph: STOREFRONT)
+{
+  cursor: String
+  node: node
+}
+
 type Errors
   @join__type(graph: STOREFRONT)
 {
@@ -57,6 +77,20 @@ type Meta
   pagination: Pagination
 }
 
+type node
+  @join__type(graph: STOREFRONT)
+{
+  entityId: ID
+  name: String
+}
+
+type pageInfo
+  @join__type(graph: STOREFRONT)
+{
+  startCursor: String
+  endCursor: String
+}
+
 type Pagination
   @join__type(graph: STORELOGS)
 {
@@ -73,6 +107,13 @@ type Product
 {
   id: ID
   name: String
+}
+
+type products
+  @join__type(graph: STOREFRONT)
+{
+  pageInfo: pageInfo
+  edges: edges
 }
 
 type ProductsResult
@@ -95,6 +136,9 @@ type Query
 
   """BigCommerce Storefront API Token generator"""
   StorefrontToken: StorefrontTokenResult! @join__field(graph: STOREFRONT)
+
+  """BigCommerce Login test"""
+  BigCommerceLogin: BigCommerceLoginResult @join__field(graph: STOREFRONT)
 }
 
 type StorefrontTokenData
