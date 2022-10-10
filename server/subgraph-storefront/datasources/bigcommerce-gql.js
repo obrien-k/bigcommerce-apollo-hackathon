@@ -1,18 +1,10 @@
 /* Postponed for now */
+/* Getting errors back at least, still needs a lot of cleanup and architecture*/
 const { GraphQLDataSource } = require('apollo-datasource-graphql');
 const { gql }               = require('apollo-server');
 const jwt                   = require('jsonwebtoken');
-const express               = require('express');
-      router                = express.Router();
-require('dotenv').config()
 
 // jwt payload
-
-router.get('/auth', (req, res, next) => {
-  bigCommerce.authorize(req.query)
-    .then(data => res.render('integrations/auth', { title: 'Authorized!', data: data })
-    .catch(next));
-  });
 
 async function checkBigCommerce(email, pass) { // where to call this? is this being executed correctly 
   const payload = async function(req, res, next) {
@@ -59,29 +51,58 @@ const login = gql`
  `;
 
 class BigCommerceLogin extends GraphQLDataSource {
-  baseURL = 'https://store-';
+  baseURL = process.env.STORE_CANONICAL_URL;
 
   willSendRequest(request) {
     const { accessToken } = this.context;
-    checkBigCommerce(request.headers.email, request.headers.pass);
+    //checkBigCommerce(request.headers.email, request.headers.pass);
 
     if (!request.headers) {
-      request.headers = {};
+      request.headers = {'Authorization':''}; // fix this
     }
-    console.log("LINE 63" + request.headers.email);
-    console.log("LINE 64" + request.headers.pass);
+ //   console.log("LINE 63" + request.headers.email);
+   // console.log("LINE 64" + request.headers.pass);
   }
 
   async getLogin() {
     try {
-      const response = await this.query(login, {
+      console.log('line 68 bigcommerce-gql.js');
+     /* const response = await this.query(login, {
         variables: {
           email,
           pass
         }
-      });
-
-      return response.data.login;
+      }); */
+      const reqBody = gql`{
+        # Get a few products from the catalog
+ # Stores in pre-launch or maintenance mode may reject queries.
+ # Access from Control Panel > Advanced Settings > Storefront API Playground
+ # or browse privately and query against https://buybutton.store/graphql
+ query paginateProducts(
+   $pageSize: Int = 3
+   $cursor: String
+   # Use GraphQL variables to change the page size, or inject the endCursor as "cursor"
+   # to go to the next page!
+ ) {
+   site {
+     products {
+       pageInfo {
+         startCursor
+         endCursor
+       }
+       edges {
+         cursor
+         node {
+           entityId
+           name
+         }
+       }
+     }
+   }
+ }
+      }`
+      return this.post(`graphql`, reqBody)
+      // return response.data.login;
     } catch (error) {
       console.error(error);
     }

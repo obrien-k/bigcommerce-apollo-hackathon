@@ -26,6 +26,11 @@ const gateway = new ApolloGateway({
 const server = new ApolloServer({
   gateway,
   subscriptions: false,
+  csrfPrevention: true,
+  cache: "bounded",
+  cors: {
+    origin: [process.env.STORE_DOMAIN,process.env.STORE_CANONICAL_URL, "https://studio.apollographql.com"]
+  },
   context: async ({req}) => {
     const bigc_email = req.headers.email;
     const bigc_pass = req.headers.pass || '';
