@@ -8,8 +8,8 @@ const resolvers = {
     StorefrontToken: async (_, { allowed_cors_origins, channel_id, expires_at }, { dataSources }) => {
       return dataSources.BigCommerceStorefrontAPI.getStorefrontToken(allowed_cors_origins, channel_id, expires_at);
     },
-    BigCommerceLogin: async (_, __, { dataSources }) => {
-      return dataSources.BigCommerceLogin.getLogin();
+    BigCommerceLogin: async (_, { authorization }, { dataSources }) => {
+      return dataSources.BigCommerceLogin.getLogin(authorization);
     }
   }
 };
