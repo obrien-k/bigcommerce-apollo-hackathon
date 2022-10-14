@@ -7,9 +7,6 @@ const resolvers = {
     // and use to make other requests within subgraphs   */
     StorefrontToken: async (_, { allowed_cors_origins, channel_id, expires_at }, { dataSources }) => {
       return dataSources.BigCommerceStorefrontAPI.getStorefrontToken(allowed_cors_origins, channel_id, expires_at);
-    },
-    BigCommerceLogin: async (_, { authorization }, { dataSources }) => {
-      return dataSources.BigCommerceLogin.getLogin(authorization);
     }
   }
 };

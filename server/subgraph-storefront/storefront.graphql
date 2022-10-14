@@ -5,13 +5,6 @@ extend schema
 type Query {
   "BigCommerce Storefront API Token generator"
   StorefrontToken: StorefrontTokenResult!
-  "BigCommerce Login test"
-  BigCommerceLogin: BigCommerceLoginResult
-}
-
-type BigCommerceLoginResult {
-  data: BigCommerceLoginData!
-  errors: Errors
 }
 
 type StorefrontTokenResult {
@@ -25,28 +18,4 @@ type Errors {
 
 type StorefrontTokenData @key(fields: "token") {
   token: String!
-}
-
-type BigCommerceLoginData {
-  site: products
-}
-
-type products {
-  pageInfo: pageInfo
-  edges: edges
-}
-
-type pageInfo {
-  startCursor: String
-  endCursor: String
-}
-
-type edges {
-  cursor: String
-  node: node
-}
-
-type node {
-  entityId: ID
-  name: String
 }
