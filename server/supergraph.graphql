@@ -25,8 +25,8 @@ type Errors
 scalar join__FieldSet
 
 enum join__Graph {
+  CATALOG @join__graph(name: "catalog", url: "http://localhost:4003/")
   CUSTOMERS @join__graph(name: "customers", url: "http://localhost:4002/")
-  PRODUCTS @join__graph(name: "products", url: "http://localhost:4003/")
   STORELOGS @join__graph(name: "storeLogs", url: "http://localhost:4009/")
   STOREFRONT @join__graph(name: "storefront", url: "http://localhost:4001/")
 }
@@ -69,26 +69,26 @@ type Pagination
 }
 
 type Product
-  @join__type(graph: PRODUCTS)
+  @join__type(graph: CATALOG)
 {
   id: ID
   name: String
 }
 
 type ProductsResult
-  @join__type(graph: PRODUCTS)
+  @join__type(graph: CATALOG)
 {
   data: [Product]
 }
 
 type Query
+  @join__type(graph: CATALOG)
   @join__type(graph: CUSTOMERS)
-  @join__type(graph: PRODUCTS)
   @join__type(graph: STORELOGS)
   @join__type(graph: STOREFRONT)
 {
   """BigCommerce Products"""
-  Products: ProductsResult @join__field(graph: PRODUCTS)
+  Products: ProductsResult @join__field(graph: CATALOG)
 
   """BigCommerce Store Logs"""
   SystemLogs: SystemLogsResult @join__field(graph: STORELOGS)
