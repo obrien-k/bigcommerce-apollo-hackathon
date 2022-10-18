@@ -8,10 +8,10 @@ subgraphs:
     routing_url: http://localhost:4002/
     schema:
       file: ./subgraph-customers/customers.graphql
-  products:
+  catalog:
     routing_url: http://localhost:4003/
     schema:
-      file: ./subgraph-products/products.graphql
+      file: ./subgraph-catalog/catalog.graphql
   storeLogs:
     routing_url: http://localhost:4009/
     schema:

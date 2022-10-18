@@ -12,7 +12,7 @@ class BigCommerceCatalogAPI extends RESTDataSource {
     this.baseURL = 'https://api.bigcommerce.com/stores/' + process.env.BIGC_STORE_HASH + '/v3/';
   }
 
-  async getProducts(){
+  async getAllProducts(){
     return this.get(`catalog/products`);
   }
 
