@@ -16,10 +16,48 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+enum Availability
+  @join__type(graph: CATALOG)
+{
+  available
+  disabled
+  preorder
+}
+
+enum Condition
+  @join__type(graph: CATALOG)
+{
+  New
+  Used
+  Refurbished
+}
+
 type Errors
   @join__type(graph: STOREFRONT)
 {
   message: String
+}
+
+type GetAllProductsResult
+  @join__type(graph: CATALOG)
+{
+  data: [Product]
+}
+
+enum GiftWrappingOptions
+  @join__type(graph: CATALOG)
+{
+  any
+  none
+  list
+}
+
+enum InventoryTracking
+  @join__type(graph: CATALOG)
+{
+  none
+  product
+  variant
 }
 
 scalar join__FieldSet
@@ -57,6 +95,20 @@ type Meta
   pagination: Pagination
 }
 
+enum OpenGraphType
+  @join__type(graph: CATALOG)
+{
+  product
+  album
+  book
+  drink
+  food
+  game
+  movie
+  song
+  tv_show
+}
+
 type Pagination
   @join__type(graph: STORELOGS)
 {
@@ -71,14 +123,113 @@ type Pagination
 type Product
   @join__type(graph: CATALOG)
 {
-  id: ID
-  name: String
+  """Product identifier"""
+  id: ID!
+
+  """Name of product, title of product page"""
+  name: String!
+
+  """Digital or physical type"""
+  type: ProductType!
+
+  """Stock Keeping Unit"""
+  sku: String
+
+  """Long description of product"""
+  description: String
+
+  """Weight in kg or lbs"""
+  weight: Int
+
+  """Width in metric or standard"""
+  width: Int
+
+  """Depth in metric or standard"""
+  depth: Int
+
+  """Height in metric or standard"""
+  height: Int
+
+  """Price of the product in localized currency"""
+  price: Int!
+
+  """Cost of the product"""
+  cost_price: Int
+
+  """Retail price of product"""
+  retail_price: Int
+
+  """Sale price of product"""
+  sale_price: Int
+
+  """Minumum advertised price of product"""
+  map_price: Int
+
+  """The ID of the tax class that applies to the product"""
+  tax_class_id: Int
+
+  """
+  Accepts AvaTax System Tax Codes, which identify products and services that fall into special sales-tax categories.
+  """
+  product_tax_code: String
+
+  """An array of IDs for the categories to which this product belongs."""
+  categories: [Int]
+  brand_id: Int
+  inventory_level: Int
+  inventory_warning_level: Int
+  inventory_tracking: InventoryTracking
+  fixed_cost_shipping_price: Int
+  is_free_shipping: Boolean
+  is_visible: Boolean
+  is_featured: Boolean
+  related_products: [Int]
+  warranty: String
+  bin_picking_number: String
+  layout_file: String
+  upc: String
+  search_keywords: String
+  availability_description: String
+  availability: Availability
+  gift_wrapping_options_type: GiftWrappingOptions
+  gift_wrapping_options_list: [Int]
+  sort_order: Int
+  condition: Condition
+  is_condition_shown: Boolean
+  order_quantity_minimum: Int
+  order_quantity_maximum: Int
+  page_title: String
+  meta_keywords: [String]
+  meta_description: String
+  view_count: Int
+  preorder_release_date: String
+  preorder_message: String
+  is_preorder_only: Boolean
+  is_price_hidden: Boolean
+  price_hidden_label: String
+  open_graph_type: OpenGraphType
+  open_graph_title: String
+  open_graph_description: String
+  open_graph_use_meta_description: Boolean
+  open_graph_use_product_name: Boolean
+  open_graph_use_image: Boolean
+  brand_name: String
+  gtin: String
+  mpn: String
+  reviews_rating_sum: Int
+  reviews_count: Int
+  total_sold: Int
+  date_created: String
+  date_modified: String
+  base_variant_id: Int
+  calculated_price: Int
 }
 
-type ProductsResult
+enum ProductType
   @join__type(graph: CATALOG)
 {
-  data: [Product]
+  physical
+  digital
 }
 
 type Query
@@ -87,8 +238,8 @@ type Query
   @join__type(graph: STORELOGS)
   @join__type(graph: STOREFRONT)
 {
-  """BigCommerce Products"""
-  Products: ProductsResult @join__field(graph: CATALOG)
+  """Retrieves all of a BigCommerce store's Products"""
+  GetAllProducts: GetAllProductsResult @join__field(graph: CATALOG)
 
   """BigCommerce Store Logs"""
   SystemLogs: SystemLogsResult @join__field(graph: STORELOGS)

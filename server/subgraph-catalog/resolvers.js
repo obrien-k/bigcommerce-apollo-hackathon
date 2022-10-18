@@ -2,8 +2,8 @@ const { AuthenticationError } = require("apollo-server"); //unused but needs to 
 
 const resolvers = {
   Query: {
-    Products: async (_, __, { dataSources }) => {
-      return dataSources.BigCommerceCatalogAPI.getProducts();
+    GetAllProducts: async (_, __, { dataSources }) => {
+      return dataSources.BigCommerceCatalogAPI.getAllProducts();
     }
   }
 };
