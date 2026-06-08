@@ -1,3 +1,21 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
         import: ["@key"])
+
+# Placeholder schema for the BigCommerce Customers subgraph. Pair this with
+# the StorefrontToken handshake in the storefront subgraph to build out
+# customer login, account, and impersonation flows.
+
+type Query {
+  "Confirms the customers subgraph is wired into the gateway. Replace with real account/login queries."
+  CustomersPlaceholder: CustomersPlaceholderResult!
+}
+
+type CustomersPlaceholderResult {
+  data: CustomersPlaceholderData!
+}
+
+type CustomersPlaceholderData @key(fields: "id") {
+  id: ID!
+  message: String!
+}
