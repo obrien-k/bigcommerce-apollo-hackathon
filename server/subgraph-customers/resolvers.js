@@ -1,7 +1,7 @@
 const resolvers = {
   Query: {
     CustomersPlaceholder: async (_, __, { dataSources }) => {
-      return dataSources.BigCommerceCustomersAPI.getPlaceholder();
+      return { data: await dataSources.BigCommerceCustomersAPI.getPlaceholder() };
     }
   }
 };
